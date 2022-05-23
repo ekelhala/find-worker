@@ -1,7 +1,14 @@
 
 class BaseText extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.styleParams = styles.RegularText;
+        this.styleParams.color = this.props.textColor;
+    }
+    
     render() {
-        return <p style={styles.RegularText}>{this.props.text}</p>;
+        return <p style={this.styleParams}>{this.props.text}</p>;
     }
 }
 
@@ -15,7 +22,7 @@ class TopBar extends React.Component {
     render() {
         return( <div style={styles.TopBarStyle}>
                <HeaderText text="findworker"/>
-               <TextButton link="#" text="Kirjaudu"/>
+               <TextButton onClick={this.props.onLoginClick} link="login.html" text="Kirjaudu"/>
                </div>
               );
     }
@@ -45,41 +52,53 @@ class SelectorComponent extends React.Component {
 class Button extends React.Component {
     constructor() {
         super();
-        this.appearance = styles.ButtonStyle;
+        this.handleClick = this.handleClick.bind(this);
     }
 
+    handleClick() {
+        this.props.onClick();
+    }
+    
     render() {
         return(
-            <a href={this.props.link} style={this.appearance}>{this.props.text}</a>
+            <a onClick={this.handleClick} style={styles.ButtonStyle}>{this.props.text}</a>
         );
     }
 }
 
-class TextButton extends Button {
+class TextButton extends React.Component {
     constructor() {
         super();
-        this.appearance = styles.TextButtonStyle;
+        this.handleClick = this.handleClick.bind(this);
     }
+    
+    handleClick() {
+        this.props.onClick();
+    }
+    
+    render() {
+        return(
+            <a onClick={this.handleClick} style={styles.TextButtonStyle}>{this.props.text}</a>
+        );
+    }
+    
 }
 
-class App extends React.Component {
+class Dialog extends React.Component {
+        
     render() {
-        return (
-        <div>
-        <Background/>
-        <TopBar/>
-        <div style={styles.MainContainer}>
-            <p style={styles.WelcomeText}>Löydä osaajia.</p>
-            <div style={styles.MainSearchContainer}>
-                <SelectorComponent items={categories.AvailableCities} descriptionText='Sijainti'/>
-                <SelectorComponent items={categories.JobCategories} descriptionText='Työ'/>
-                <Button link="#" text='Hae'/>
+        return(
+            <div style={{visibility: this.props.show ? "visible" : "hidden"}}>
+                <div style={styles.DialogStyle}>{this.props.children}</div>
             </div>
-        </div>
-        </div>
         );
     }
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App/>);
+class TextField extends React.Component {
+    render() {
+        return(
+            <input type={this.props.inputType} placeholder={this.props.tip} style={styles.TextFieldStyle}/>
+        );
+    }
+}

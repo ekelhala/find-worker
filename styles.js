@@ -51,7 +51,7 @@ const MainContainer = {
     left: "0",
     right: "0",
     overflow: "auto",
-    backgroundColor: "rgba(255,255,255,0.5)"
+    backgroundColor: "rgba(255,255,255,0.3)"
 }
 
 const Selector = {
@@ -63,15 +63,17 @@ const Selector = {
 }
 
 const ButtonStyle = {
-    display: "inline-block",
+    display: "block",
     fontFamily: "Arial",
     fontSize: "20px",
     padding: "10px 25px",
     textDecoration: "none",
+    textAlign: "center",
     color: ColorScheme.textColor,
     backgroundColor: ColorScheme.secondaryColor,
     marginLeft: "30px",
-    boxShadow: "0px 1px 3px 0px rgba(0,0,0,0.5)"
+    boxShadow: "0px 1px 3px 0px rgba(0,0,0,0.5)",
+    cursor: "pointer"
 }
 
 const MainSearchContainer = {
@@ -94,10 +96,40 @@ const TextButtonStyle = {
     textDecoration: "none",
     fontSize: "20px",
     fontFamily: "Arial",
-    marginRight: "10px"
+    marginRight: "10px",
+    cursor: "pointer"
+}
+
+const DialogStyle = {
+    position: "fixed",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "10px",
+    margin: "auto",
+    width: "50%",
+    height: "50%",
+    top: "0",
+    bottom: "0",
+    left: "0",
+    right: "0",
+    zIndex: "5",
+    boxShadow: "0px 2px 5px 0px rgba(0,0,0,0.5)",
+    borderRadius: "4px",
+    backgroundColor: "#ffffff",
+    padding: "15px"
+}
+
+const TextFieldStyle = {
+    display: "inline-block",
+    fontFamily: "Arial",
+    fontSize: "20px",
+    padding: "5px",
 }
 
 const styles = {
+    ColorScheme: ColorScheme,
     MainHeader: MainHeader,
     TopBarStyle: TopBarStyle,
     RegularText: RegularText,
@@ -107,5 +139,7 @@ const styles = {
     ButtonStyle: ButtonStyle,
     MainSearchContainer: MainSearchContainer,
     BackgroundImage: BackgroundImage,
-    TextButtonStyle: TextButtonStyle
+    TextButtonStyle: TextButtonStyle,
+    DialogStyle: DialogStyle,
+    TextFieldStyle: TextFieldStyle
 }
