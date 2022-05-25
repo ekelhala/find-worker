@@ -56,9 +56,28 @@ class SelectorComponent extends React.Component {
 }
 
 class Button extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.state = {
+                fontFamily: "Arial",
+                fontSize: "17px",
+                padding: "10px 25px",
+                textDecoration: "none",
+                textAlign: "center",
+                color: ColorScheme.textColor,
+                backgroundColor: ColorScheme.secondaryColor,
+                boxShadow: "0px 1px 3px 0px rgba(0,0,0,0.5)",
+                cursor: "pointer"
+        }
+        if(this.props.type !== undefined) {
+            if(this.props.type == "positive") {
+                this.state.backgroundColor = styles.ColorScheme.positiveButtonColor;
+            }
+            else if(this.props.type == "negative") {
+                this.state.backgroundColor = styles.ColorScheme.negativeButtonColor;
+            }
+        }
     }
 
     handleClick() {
@@ -67,7 +86,7 @@ class Button extends React.Component {
     
     render() {
         return(
-            <a onClick={this.handleClick} style={styles.ButtonStyle}>{this.props.text}</a>
+            <a onClick={this.handleClick} style={this.state}>{this.props.text}</a>
         );
     }
 }
@@ -118,40 +137,53 @@ class ContentContainer extends React.Component {
     }
 }
 
+class TextContentContainer extends React.Component {
+    render() {
+        return(
+            <div style={styles.TextContentContainerStyle}>{this.props.children}</div>
+        );
+    }
+}
+
 class Card extends React.Component {
     render() {
         return(
             <div style={styles.CardStyle}>
-                <ContentContainer>{this.props.children}</ContentContainer>
+                <div>{this.props.children}</div>
             </div>
         );
     }
 }
 
-/*
-class List extends React.Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            listItems: this.props.items
-        };
-    }
-    
+class Order extends React.Component {
     render() {
-        const list = 
+        let area = categories.AvailableCities[this.props.order.alue];
+        let job = categories.JobCategories[this.props.order.palvelu];
+        let etunimi = this.props.order.asiakas.etunimi;
+        let sukunimi = this.props.order.asiakas.sukunimi;
+        let hinta = this.props.order.hinta;
         return(
-            
+            <TextContentContainer>
+            <Divider/>
+            <div style={styles.OrderStyle}>
+                <BaseText text={"Työ: " + job} textColor={styles.ColorScheme.textColorDark} textSize="17px"/>
+                <BaseText text={"Alue: " + area} textColor={styles.ColorScheme.textColorDark} textSize="17px"/>
+                <BaseText text={"Asiakas: " + etunimi + " " + sukunimi} textColor={styles.ColorScheme.textColorDark} textSize="17px"/>
+                <BaseText text={"Tarjottu hinta: " + hinta + "€"} textColor={styles.ColorScheme.textColorDark} textSize="17px"/>
+                <div style={styles.HorizontalContentContainer}>
+                    <Button text="Hyväksy" type='positive'/>
+                    <Button text="Hylkää" type='negative'/>
+                </div>
+            </div>
+            </TextContentContainer>
         );
     }
 }
 
-class ListItem extends React.Component {
+class Divider extends React.Component {
     render() {
         return(
-            
+            <div style={styles.DividerStyle}></div>
         );
     }
 }
-
-*/

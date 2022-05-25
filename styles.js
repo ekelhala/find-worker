@@ -2,7 +2,10 @@ const ColorScheme = {
     primaryColor: "#bf8d04",
     secondaryColor: "#f0ba26",
     textColor: "#ffffff",
-    textColorDark: "#000000"
+    textColorDark: "#000000",
+    dividerColor: "#bfbfbf",
+    positiveButtonColor: "#3ff23f",
+    negativeButtonColor: "#f53b3b"
 }
 
 const MainHeader = {
@@ -71,7 +74,7 @@ const Selector = {
 
 const ButtonStyle = {
     fontFamily: "Arial",
-    fontSize: "20px",
+    fontSize: "17px",
     padding: "10px 25px",
     textDecoration: "none",
     textAlign: "center",
@@ -142,10 +145,37 @@ const ContentContainerStyle = {
     rowGap: "5px"
 }
 
+const TextContentContainerStyle = {
+    display: "flex",
+    flexFlow: "column wrap",
+    justifyContent: "flex-start",
+    alignContent: "flex-start"
+}
+
 const CardStyle = {
     padding: "15px",
     backgroundColor: "rgba(255,255,255,1)",
     boxShadow: "2px 3px 4px 0px rgba(0,0,0,0.5)"
+}
+
+const OrderStyle = {
+    marginBottom: "10px",
+    rowGap: "0px"
+}
+
+const DividerStyle = {
+    height: "2px",
+    backgroundColor: ColorScheme.dividerColor,
+    marginTop: "2px",
+    marginBottom: "2px"
+}
+
+const HorizontalContentContainer = {
+    display: "flex",
+    flexFlow: "row wrap",
+    alignItems: "flex-start",
+    columnGap: "20px",
+    padding: "10px"
 }
 
 const styles = {
@@ -164,5 +194,9 @@ const styles = {
     TextFieldStyle: TextFieldStyle,
     ContentContainerStyle: ContentContainerStyle,
     BlackText: BlackText,
-    CardStyle: CardStyle
+    CardStyle: CardStyle,
+    TextContentContainerStyle: TextContentContainerStyle,
+    OrderStyle: OrderStyle,
+    DividerStyle: DividerStyle,
+    HorizontalContentContainer: HorizontalContentContainer
 }

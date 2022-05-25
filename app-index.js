@@ -27,16 +27,20 @@ class App extends React.Component {
                 <div style={styles.MainContainer}>
                 <ContentContainer>
                 <Card>
+                <ContentContainer>
                     <p style={styles.WelcomeText}>Löydä osaajia.</p>
                     <div style={styles.MainSearchContainer}>
                         <SelectorComponent items={categories.AvailableCities} descriptionText='Sijainti'/>
                         <SelectorComponent items={categories.JobCategories} descriptionText='Työ'/>
                         <Button link="#" text='Hae'/>
                     </div>
+                </ContentContainer>
                 </Card>
                 <Card>
+                <TextContentContainer>
                     <BaseText text='Hei!' textColor={styles.ColorScheme.primaryColor} textSize="25px"/>
                     <BaseText text='Me olemme  findworker, ensimmäinen kevytyrittäjille suunnattu työnvälityspalvelu. Sivustomme on vielä kehitysvaiheessa mutta suunnitelmamme on julkaista se yleiseen käyttöön pian.' textColor={styles.ColorScheme.textColorDark} textSize='15px'/>
+                </TextContentContainer>
                 </Card>
                 </ContentContainer>
                 </div>
