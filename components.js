@@ -3,12 +3,21 @@ class BaseText extends React.Component {
     
     constructor(props) {
         super(props);
-        this.styleParams = styles.RegularText;
-        this.styleParams.color = this.props.textColor;
+        this.state = {
+            color: this.props.textColor,
+            fontFamily: "Arial",
+            fontSize: this.props.textSize
+        };
     }
     
     render() {
-        return <p style={this.styleParams}>{this.props.text}</p>;
+        return <p style={this.state}>{this.props.text}</p>;
+    }
+}
+
+class DarkText extends React.Component {
+    render() {
+        return <p style={styles.BlackText}>{this.props.text}</p>
     }
 }
 
@@ -20,10 +29,7 @@ class HeaderText extends React.Component {
 
 class TopBar extends React.Component {
     render() {
-        return( <div style={styles.TopBarStyle}>
-               <HeaderText text="findworker"/>
-               <TextButton onClick={this.props.onLoginClick} link="login.html" text="Kirjaudu"/>
-               </div>
+        return( <div style={styles.TopBarStyle}>{this.props.children}</div>
               );
     }
 }
@@ -87,8 +93,9 @@ class TextButton extends React.Component {
 class Dialog extends React.Component {
         
     render() {
+
         return(
-            <div style={{visibility: this.props.show ? "visible" : "hidden"}}>
+            <div className={this.props.show ? "dialog-visible" : "dialog-hidden"}>
                 <div style={styles.DialogStyle}>{this.props.children}</div>
             </div>
         );
@@ -102,3 +109,49 @@ class TextField extends React.Component {
         );
     }
 }
+
+class ContentContainer extends React.Component {
+    render() {
+        return(
+            <div style={styles.ContentContainerStyle}>{this.props.children}</div>
+        );
+    }
+}
+
+class Card extends React.Component {
+    render() {
+        return(
+            <div style={styles.CardStyle}>
+                <ContentContainer>{this.props.children}</ContentContainer>
+            </div>
+        );
+    }
+}
+
+/*
+class List extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            listItems: this.props.items
+        };
+    }
+    
+    render() {
+        const list = 
+        return(
+            
+        );
+    }
+}
+
+class ListItem extends React.Component {
+    render() {
+        return(
+            
+        );
+    }
+}
+
+*/

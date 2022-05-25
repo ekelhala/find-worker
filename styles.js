@@ -1,14 +1,14 @@
 const ColorScheme = {
     primaryColor: "#bf8d04",
     secondaryColor: "#f0ba26",
-    textColor: "#ffffff"
+    textColor: "#ffffff",
+    textColorDark: "#000000"
 }
 
 const MainHeader = {
     float: "left",
     display: "block",
-    marginLeft: "10px",
-    fontSize: "25px",
+    fontSize: "20px",
     fontFamily: "Arial",
     color: ColorScheme.textColor,
     fontStyle: "bold",
@@ -18,6 +18,12 @@ const MainHeader = {
 const RegularText = {
     fontSize: "18px",
     color: ColorScheme.textColor,
+    fontFamily: "Arial"
+}
+
+const BlackText = {
+    fontSize: "18px",
+    color: "#000000",
     fontFamily: "Arial",
     display: "inline-block"
 }
@@ -26,32 +32,33 @@ const WelcomeText = {
     fontSize: "50px",
     fontFamily: "Arial",
     textAlign: "center",
-    color: ColorScheme.secondaryColor,
+    color: ColorScheme.primaryColor
 }
 
 const TopBarStyle = {
     position: "fixed",
-    width: "100%",
+    width: "auto",
+    padding: "5px 10px",
     top: "0",
     left: "0",
+    right: "0",
+    zIndex: "4",
     backgroundColor: ColorScheme.primaryColor,
     boxShadow: "0px 0px 3px 0px",
-    display: "inline-flex",
+    display: "flex",
     alignItems: "center",
     justifyContent: "space-between"
 }
 
 const MainContainer = {
-    position: "fixed",
+    position: "absolute",
     margin: "auto",
     width: "50%",
     height: "50%",
     top: "0",
     bottom: "0",
     left: "0",
-    right: "0",
-    overflow: "auto",
-    backgroundColor: "rgba(255,255,255,0.3)"
+    right: "0"
 }
 
 const Selector = {
@@ -59,11 +66,10 @@ const Selector = {
     fontFamily: "Arial",
     fontSize: "20px",
     padding: "5px",
-    marginLeft: "20px"
+    cursor: "pointer"
 }
 
 const ButtonStyle = {
-    display: "block",
     fontFamily: "Arial",
     fontSize: "20px",
     padding: "10px 25px",
@@ -71,7 +77,6 @@ const ButtonStyle = {
     textAlign: "center",
     color: ColorScheme.textColor,
     backgroundColor: ColorScheme.secondaryColor,
-    marginLeft: "30px",
     boxShadow: "0px 1px 3px 0px rgba(0,0,0,0.5)",
     cursor: "pointer"
 }
@@ -79,7 +84,8 @@ const ButtonStyle = {
 const MainSearchContainer = {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    columnGap: "20px"
 }
 
 const BackgroundImage = {
@@ -87,11 +93,11 @@ const BackgroundImage = {
     width: "100%",
     height: "auto",
     top: "0",
-    left: "0",
-    filter: "blur(3px)"
+    left: "0"
 }
 
 const TextButtonStyle = {
+    display: "inline-block",
     color: ColorScheme.textColor,
     textDecoration: "none",
     fontSize: "20px",
@@ -128,6 +134,20 @@ const TextFieldStyle = {
     padding: "5px",
 }
 
+const ContentContainerStyle = {
+    display: "flex",
+    flexFlow: "column wrap",
+    justifyContent: "flex-start",
+    alignContent: "center",
+    rowGap: "5px"
+}
+
+const CardStyle = {
+    padding: "15px",
+    backgroundColor: "rgba(255,255,255,1)",
+    boxShadow: "2px 3px 4px 0px rgba(0,0,0,0.5)"
+}
+
 const styles = {
     ColorScheme: ColorScheme,
     MainHeader: MainHeader,
@@ -141,5 +161,8 @@ const styles = {
     BackgroundImage: BackgroundImage,
     TextButtonStyle: TextButtonStyle,
     DialogStyle: DialogStyle,
-    TextFieldStyle: TextFieldStyle
+    TextFieldStyle: TextFieldStyle,
+    ContentContainerStyle: ContentContainerStyle,
+    BlackText: BlackText,
+    CardStyle: CardStyle
 }
