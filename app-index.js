@@ -19,6 +19,10 @@ class App extends React.Component {
         });
     }
     
+    login() {
+        window.location.href = "index.php?page=user";
+    }
+    
     render() {
         return(
             <div>
@@ -50,7 +54,7 @@ class App extends React.Component {
                     <TextField inputType='password' tip='Salasana'/>
                     <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "10px"}}>
                         <Button text="Peruuta" onClick={this.hideDialog}/>
-                        <Button text="OK"/>
+                        <Button text="OK" onClick={this.login}/>
                     </div>
                 </Dialog>
             </div>

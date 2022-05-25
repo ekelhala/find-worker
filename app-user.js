@@ -1,4 +1,9 @@
 class App extends React.Component {
+    
+    logout() {
+        window.location.href = "index.php?page=index";
+    }
+    
     render() {
         //User-objekti voidaan hakea esim. tietokannasta
         const user = {
@@ -29,7 +34,7 @@ class App extends React.Component {
         <div>
             <TopBar>
                 <BaseText text='Oma sivu' textColor={styles.ColorScheme.textColor}/>
-                <Button text='Kirjaudu ulos'/>
+                <Button text='Kirjaudu ulos' onClick={this.logout}/>
             </TopBar>
             <div style={styles.MainContainer}>
                 <ContentContainer>
