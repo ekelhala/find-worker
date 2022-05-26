@@ -46,7 +46,7 @@ class App extends React.Component {
                 </Card>
                 <Card>
                 <TextContentContainer>
-                    <BaseText text='Hei!' textColor={styles.ColorScheme.primaryColor} textSize="25px"/>
+                    <BaseText text='Hei' textColor={styles.ColorScheme.primaryColor} textSize="25px"/>
                     <BaseText text='Me olemme  findworker, ensimmäinen kevytyrittäjille suunnattu työnvälityspalvelu. Sivustomme on vielä kehitysvaiheessa mutta suunnitelmamme on julkaista se yleiseen käyttöön pian.' textColor={styles.ColorScheme.textColorDark} textSize='15px'/>
                 </TextContentContainer>
                 </Card>
