@@ -23,6 +23,10 @@ class App extends React.Component {
         window.location.href = "index.php?page=user";
     }
     
+    search() {
+        window.location.href = "index.php?page=search";
+    }
+    
     render() {
         return(
             <div>
@@ -36,7 +40,7 @@ class App extends React.Component {
                     <div style={styles.MainSearchContainer}>
                         <SelectorComponent items={categories.AvailableCities} descriptionText='Sijainti'/>
                         <SelectorComponent items={categories.JobCategories} descriptionText='Työ'/>
-                        <Button link="#" text='Hae'/>
+                        <Button onClick={this.search} text='Hae'/>
                     </div>
                 </ContentContainer>
                 </Card>

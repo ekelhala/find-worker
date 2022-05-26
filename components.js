@@ -187,3 +187,41 @@ class Divider extends React.Component {
         );
     }
 }
+
+class SearchList extends React.Component {
+    render() {
+        return(
+            <Card>
+                <TextContentContainer>
+                    <BaseText text={'Hakutulokset (' + this.props.children.length + ')'} textSize='20px' textColor={styles.ColorScheme.primaryColor}/>
+                </TextContentContainer>
+                    {this.props.children}
+            </Card>
+        );
+    }
+}
+
+class SearchResultItem extends React.Component {
+    
+    createOrder() {
+        window.location.href = "index.php?page=order";
+    }
+    
+    render() {
+        return(
+            <ContentContainer>
+            <Divider/>
+            <TextContentContainer>
+            <BaseText text={this.props.name} textSize='20px' textColor={styles.ColorScheme.secondaryColor}/>
+            <BaseText text={"Palvelu: " + this.props.service} textSize='15px' textColor={styles.ColorScheme.textColorDark}/>
+            <BaseText text={"Alue: " + this.props.area} textSize='15px' textColor={styles.ColorScheme.textColorDark}/>
+            <BaseText text={"Lisätiedot: " + this.props.additionalInfo} textSize='15px' textColor={styles.ColorScheme.textColorDark}/>
+            <BaseText text={"Pyydetty hinta: " + this.props.ask + '€'} textSize='15px' textColor={styles.ColorScheme.textColorDark}/>
+            </TextContentContainer>
+            <div style={{display: 'flex', width: '100%', justifyContent: 'flex-end', marginBottom: '10px'}}>
+            <Button text='Tee tarjous' onClick={this.createOrder}/>
+            </div>
+            </ContentContainer>
+        );
+    }
+}

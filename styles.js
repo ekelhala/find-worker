@@ -2,7 +2,7 @@ const ColorScheme = {
     primaryColor: "#bf8d04",
     secondaryColor: "#f0ba26",
     textColor: "#ffffff",
-    textColorDark: "#000000",
+    textColorDark: "#242423",
     dividerColor: "#bfbfbf",
     positiveButtonColor: "#3ff23f",
     negativeButtonColor: "#f53b3b"
@@ -69,7 +69,8 @@ const Selector = {
     fontFamily: "Arial",
     fontSize: "20px",
     padding: "5px",
-    cursor: "pointer"
+    cursor: "pointer",
+    borderRadius: "5px"
 }
 
 const ButtonStyle = {
@@ -149,7 +150,8 @@ const TextContentContainerStyle = {
     display: "flex",
     flexFlow: "column wrap",
     justifyContent: "flex-start",
-    alignContent: "flex-start"
+    alignContent: "flex-start",
+    rowGap: "0px"
 }
 
 const CardStyle = {
@@ -165,6 +167,7 @@ const OrderStyle = {
 
 const DividerStyle = {
     height: "2px",
+    width: "100%",
     backgroundColor: ColorScheme.dividerColor,
     marginTop: "2px",
     marginBottom: "2px"
