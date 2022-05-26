@@ -78,6 +78,7 @@ class App extends React.Component {
                                             <SearchResultItem name={result.user.etunimi + " " + result.user.sukunimi} service={categories.JobCategories[result.searchedService] }ask={result.askPrice} area={categories.AvailableCities[result.searchedArea]} additionalInfo={result.additionalInfo} onButtonClick={this.showDialog}/>);
         return (
             <div>
+                <Background/>
                 <TopBar>
                 <div style={styles.HorizontalContentContainer}>
                     <SelectorComponent descriptionText='Sijainti' items={categories.AvailableCities}/>
@@ -85,13 +86,12 @@ class App extends React.Component {
                     <Button text='Hae'/>
                 </div>
                 </TopBar>
-                <LoginDialog show={this.state.showLogin} onPositiveButtonClick={this.loginComplete} onNegativeButtonClick={this.hideDialog}/>
-                <Background/>
                 <div style={styles.MainContainer}>
                 <SearchList>
                     {searchResultList}
                 </SearchList>
                 </div>
+                <LoginDialog show={this.state.showLogin} onPositiveButtonClick={this.loginComplete} onNegativeButtonClick={this.hideDialog}/>
             </div>
         );
     }
