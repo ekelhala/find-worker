@@ -52,15 +52,7 @@ class App extends React.Component {
                 </Card>
                 </ContentContainer>
                 </div>
-                <Dialog show={this.state.showLoginDialog}>
-                    <BaseText text='Kirjaudu sisään, ole hyvä' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
-                    <TextField inputType='text' tip='Sähköposti'/>
-                    <TextField inputType='password' tip='Salasana'/>
-                    <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "10px"}}>
-                        <Button text="Peruuta" onClick={this.hideDialog}/>
-                        <Button text="OK" onClick={this.login}/>
-                    </div>
-                </Dialog>
+                <LoginDialog show={this.state.showLoginDialog} onPositiveButtonClick={this.login} onNegativeButtonClick={this.hideDialog}/>
             </div>
         );
     }

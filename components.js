@@ -202,11 +202,7 @@ class SearchList extends React.Component {
 }
 
 class SearchResultItem extends React.Component {
-    
-    createOrder() {
-        window.location.href = "index.php?page=order";
-    }
-    
+        
     render() {
         return(
             <ContentContainer>
@@ -219,9 +215,25 @@ class SearchResultItem extends React.Component {
             <BaseText text={"Pyydetty hinta: " + this.props.ask + '€'} textSize='15px' textColor={styles.ColorScheme.textColorDark}/>
             </TextContentContainer>
             <div style={{display: 'flex', width: '100%', justifyContent: 'flex-end', marginBottom: '10px'}}>
-            <Button text='Tee tarjous' onClick={this.createOrder}/>
+            <Button text='Tee tarjous' onClick={this.props.onButtonClick}/>
             </div>
             </ContentContainer>
+        );
+    }
+}
+
+class LoginDialog extends React.Component {
+    render() {
+        return(
+            <Dialog show={this.props.show}>
+                <BaseText text='Kirjaudu sisään, ole hyvä' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
+                <TextField inputType='text' tip='Sähköposti'/>
+                <TextField inputType='password' tip='Salasana'/>
+                <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "10px"}}>
+                    <Button text="Peruuta" onClick={this.props.onNegativeButtonClick}/>
+                    <Button text="OK" onClick={this.props.onPositiveButtonClick}/>
+                </div>
+            </Dialog>
         );
     }
 }
