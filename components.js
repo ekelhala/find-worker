@@ -4,7 +4,7 @@ class BaseText extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            color: this.props.textColor,
+            color: this.props.textColor||"15px",
             fontFamily: "Arial",
             fontSize: this.props.textSize
         };
@@ -122,9 +122,19 @@ class Dialog extends React.Component {
 }
 
 class TextField extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.onValueChange = this.onValueChange.bind(this);
+    }
+    
+    onValueChange(event) {
+        this.props.onChangeListener(event);
+    }
+    
     render() {
         return(
-            <input type={this.props.inputType} placeholder={this.props.tip} style={styles.TextFieldStyle}/>
+            <input type={this.props.inputType} placeholder={this.props.tip} defaultValue={this.props.defaultText} value={this.props.value} onChange={this.onValueChange} name={this.props.name} style={styles.TextFieldStyle}/>
         );
     }
 }
@@ -234,6 +244,179 @@ class LoginDialog extends React.Component {
                     <Button text="OK" onClick={this.props.onPositiveButtonClick}/>
                 </div>
             </Dialog>
+        );
+    }
+}
+
+class UserInfoForm extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            etunimi: this.props.user.etunimi,
+            sukunimi: this.props.user.sukunimi,
+            sahkoposti: this.props.user.sahkoposti,
+            matkapuhelin: this.props.user.matkapuhelin,
+            alueet: this.props.user.alueet,
+            palvelut: this.props.user.palvelut,
+            showCityDialog: false,
+            showJobDialog: false
+        };
+        this.onInputChange = this.onInputChange.bind(this);
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+        this.onSelectedAreasChanged = this.onSelectedAreasChanged.bind(this);
+        this.onSelectedJobsChanged = this.onSelectedJobsChanged.bind(this);
+    }
+    
+    onInputChange(event) {
+        let target = event.target;
+        let value = target.value;
+        let name = target.name;
+        
+        this.setState({
+            [name]: value
+        });
+    }
+    
+    onFormSubmit() {
+        this.props.onSubmit(this.state);
+    }
+    
+    onSelectedAreasChanged(areas) {
+        let oldState = this.state;
+        oldState.alueet = areas.map((element) => categories.AvailableCities.indexOf(element));
+        this.setState(oldState);
+    }
+    
+    onSelectedJobsChanged(jobs) {
+        let oldState = this.state;
+        oldState.palvelut = jobs.map((element) => categories.JobCategories.indexOf(element));
+        this.setState(oldState);
+    }
+        
+    render() {
+        return(
+            <div>
+                <ContentContainer>
+                    <form id='form1'>
+                        <div style={styles.HorizontalContentContainer}>
+                        <BaseText text='Etunimi' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
+                        <TextField type='text' name='etunimi' value={this.state.etunimi} onChangeListener={this.onInputChange}/>
+                        </div>
+                        <div style={styles.HorizontalContentContainer}>
+                        <BaseText text='Sukunimi' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
+                        <TextField type='text' name='sukunimi' value={this.state.sukunimi} onChangeListener={this.onInputChange}/>
+                        </div>
+                        <div style={styles.HorizontalContentContainer}>
+                        <BaseText text='Toiminta-alueet' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
+                        <Button text='Muokkaa' onClick={() =>{let s = this.state; s.showCityDialog = true; this.setState(s);}}/>
+                        </div>
+                        <div style={styles.HorizontalContentContainer}>
+                        <BaseText text='Palvelut' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
+                        <Button text='Muokkaa' onClick={() =>{let s = this.state; s.showJobDialog = true; this.setState(s);}}/>
+                        </div>
+                        <div style={styles.HorizontalContentContainer}>
+                        <BaseText text='Sähköposti' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
+                        <TextField type='email' name='sahkoposti' value={this.state.sahkoposti} onChangeListener={this.onInputChange}/>
+                        </div>
+                        <div style={styles.HorizontalContentContainer}>
+                        <BaseText text='Puhelin' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
+                        <TextField type='tel' name='matkapuhelin' value={this.state.matkapuhelin} onChangeListener={this.onInputChange}/>
+                        </div>
+                    </form>
+                </ContentContainer>
+                <div style={styles.HorizontalContentContainer}>
+                    <Button text='Tallenna' onClick={this.onFormSubmit}/>
+                    <Button text='Peruuta' type='negative' onClick={this.props.onCancel}/>
+                </div>
+            
+            <Dialog show={this.state.showCityDialog}>
+                <CheckList items={categories.AvailableCities} selected={this.props.user.alueet.map((itemIndex) => categories.AvailableCities[itemIndex])} onSelectedItemsChangedListener={this.onSelectedAreasChanged}/>
+                <div style={styles.HorizontalContentContainer}>
+                    <Button text='Sulje' onClick={() =>{let s = this.state; s.showCityDialog = false; this.setState(s);}}/>
+                </div>
+            </Dialog>
+
+            <Dialog show={this.state.showJobDialog}>
+                <CheckList items={categories.JobCategories} selected={this.props.user.palvelut.map((itemIndex) => categories.JobCategories[itemIndex])} onSelectedItemsChangedListener={this.onSelectedJobsChanged}/>
+                <div style={styles.HorizontalContentContainer}>
+                    <Button text='Sulje' onClick={() =>{let s = this.state; s.showJobDialog = false; this.setState(s);}}/>
+                </div>
+            </Dialog>
+
+            </div>
+        );
+    }
+}
+
+class CheckBox extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.onValueChange = this.onValueChange.bind(this);
+    }
+    
+    onValueChange(event) {
+        const values = {
+            name: this.props.label,
+            checked: event.target.checked
+        }
+        this.props.onValueChangeListener(values);
+    }
+    
+    render() {
+        return(
+            <div style={{display: 'flex', flexFlow: 'row wrap', alignItems: 'center', columnGap: '10px'}}>
+            <BaseText text={this.props.label} textSize='17px' textColor={styles.ColorScheme.primaryColor}/>
+            <div className='checkBoxContainer'>
+                <input type='checkbox' onChange={this.onValueChange} defaultChecked={this.props.isChecked ? 'checked' : ''}/>
+                <div className='checkbox'></div>
+            </div>
+            </div>
+        );
+    }
+}
+
+class CheckList extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: this.props.items,
+            selectedItems: this.props.selected
+        }
+        this.onItemChanged = this.onItemChanged.bind(this);
+    }
+    
+    onItemChanged(event) {
+        let name = event.name;
+        let value = event.checked;
+        let currentlySelected = this.state.selectedItems;
+        
+        if(currentlySelected.includes(name)) {
+            if(!value) {
+                let index = currentlySelected.indexOf(name);
+                currentlySelected.splice(index, 1);
+            }
+        }
+        else {
+            if(value) {
+                currentlySelected.push(name);
+            }
+        }
+        
+        this.setState({
+            selectedItems: currentlySelected
+        });
+        this.props.onSelectedItemsChangedListener(this.state.selectedItems);
+    }
+    
+    render() {
+        const items = this.props.items.map((item) => <CheckBox label={item} onValueChangeListener={this.onItemChanged} isChecked={this.state.selectedItems.includes(item)}/>);
+        return(
+        <div>
+        <TextContentContainer>{items}</TextContentContainer>
+        </div>
         );
     }
 }
