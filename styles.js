@@ -102,9 +102,9 @@ const BackgroundImage = {
 
 const TextButtonStyle = {
     display: "inline-block",
-    color: ColorScheme.textColor,
+    color: ColorScheme.primaryColor,
     textDecoration: "none",
-    fontSize: "20px",
+    fontSize: "15px",
     fontFamily: "Arial",
     marginRight: "10px",
     cursor: "pointer"

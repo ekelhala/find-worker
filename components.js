@@ -233,12 +233,25 @@ class SearchResultItem extends React.Component {
 }
 
 class LoginDialog extends React.Component {
+    
+    constructor(props) {
+        super(props);
+    }
+    
+    openRegisterPage() {
+        window.location.href = "index.php?page=signup"
+    }
+    
     render() {
         return(
             <Dialog show={this.props.show}>
                 <BaseText text='Kirjaudu sisään, ole hyvä' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
                 <TextField inputType='text' tip='Sähköposti'/>
                 <TextField inputType='password' tip='Salasana'/>
+                <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "3px"}}>
+                    <BaseText text='Eikö sinulla ole tiliä?' textColor={styles.ColorScheme.textColorDark} textSize="15px"/>
+                    <TextButton text='Rekisteröidy tästä' onClick={this.openRegisterPage}/>
+                </div>
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center", gap: "10px"}}>
                     <Button text="Peruuta" onClick={this.props.onNegativeButtonClick}/>
                     <Button text="OK" onClick={this.props.onPositiveButtonClick}/>
@@ -308,14 +321,6 @@ class UserInfoForm extends React.Component {
                         <TextField type='text' name='sukunimi' value={this.state.sukunimi} onChangeListener={this.onInputChange}/>
                         </div>
                         <div style={styles.HorizontalContentContainer}>
-                        <BaseText text='Toiminta-alueet' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
-                        <Button text='Muokkaa' onClick={() =>{let s = this.state; s.showCityDialog = true; this.setState(s);}}/>
-                        </div>
-                        <div style={styles.HorizontalContentContainer}>
-                        <BaseText text='Palvelut' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
-                        <Button text='Muokkaa' onClick={() =>{let s = this.state; s.showJobDialog = true; this.setState(s);}}/>
-                        </div>
-                        <div style={styles.HorizontalContentContainer}>
                         <BaseText text='Sähköposti' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
                         <TextField type='email' name='sahkoposti' value={this.state.sahkoposti} onChangeListener={this.onInputChange}/>
                         </div>
@@ -323,12 +328,20 @@ class UserInfoForm extends React.Component {
                         <BaseText text='Puhelin' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
                         <TextField type='tel' name='matkapuhelin' value={this.state.matkapuhelin} onChangeListener={this.onInputChange}/>
                         </div>
+                        <div style={styles.HorizontalContentContainer}>
+                        <BaseText text='Toiminta-alueet' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
+                        <Button text='Muokkaa' onClick={() =>{let s = this.state; s.showCityDialog = true; this.setState(s);}}/>
+                        </div>
+                        <div style={styles.HorizontalContentContainer}>
+                        <BaseText text='Palvelut' textColor={styles.ColorScheme.primaryColor} textSize="20px"/>
+                        <Button text='Muokkaa' onClick={() =>{let s = this.state; s.showJobDialog = true; this.setState(s);}}/>
+                        </div>
                     </form>
-                </ContentContainer>
                 <div style={styles.HorizontalContentContainer}>
                     <Button text='Tallenna' onClick={this.onFormSubmit}/>
                     <Button text='Peruuta' type='negative' onClick={this.props.onCancel}/>
                 </div>
+                </ContentContainer>
             
             <Dialog show={this.state.showCityDialog}>
                 <CheckList items={categories.AvailableCities} selected={this.props.user.alueet.map((itemIndex) => categories.AvailableCities[itemIndex])} onSelectedItemsChangedListener={this.onSelectedAreasChanged}/>
